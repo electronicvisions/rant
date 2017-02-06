@@ -28,6 +28,11 @@ def configure(cfg):
         cfg.check_cxx(lib=['gmp', 'gmpxx'], uselib_store='GMP',
                 defines='USE_GMP')
 
+    cfg.check_cxx(
+        header_name='cereal/cereal.hpp',
+        mandatory=False
+    )
+
     # build with gcov extension if any of the following coverage tools is installed
     cov = ['lcov', 'gcovr']
     if any([cfg.find_program(ii, mandatory=False) for ii in cov]):
