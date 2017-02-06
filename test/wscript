@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 import sys, os
 
-components = ['gtest', '..']
-recurse    = lambda ctx : map(lambda proj: ctx.recurse(proj), components)
-
 def options(opt):
-    recurse(opt)
+    opt.recurse('..')
     opt.load('compiler_cxx')
     opt.load('boost')
     opt.add_option('--no-deprecated-tests', action='store_true', default=False,
             dest='nodepr', help='build without deprecated tests')
 
 def configure(cfg):
-    recurse(cfg)
+    cfg.recurse('..')
     cfg.load('compiler_cxx')
     cfg.load('boost')
+
+    cfg.check_cxx(uselib_store='GTEST4RANTTESTS',
+                   mandatory=True,
+                   header_name='gtest/gtest.h',
+                   lib='gtest'
+    )
 
     cfg.check_boost(
             lib='serialization system thread',
@@ -31,7 +34,7 @@ def configure(cfg):
         cfg.check_cxx(lib='gcov', linkflags='--coverage', cxxflags='--coverage')
 
 def build(bld):
-    recurse(bld)
+    bld.recurse('..')
 
     sources = bld.path.ant_glob('*.cc') \
             + bld.path.ant_glob('regression/*.cc')
@@ -52,6 +55,7 @@ def build(bld):
     bld(target          = 'rant-tests',
         features        = 'cxx cxxprogram',
         source          = sources,
-        use             = ['rant', 'gtest', 'BOOST', 'GCOV', 'GMP'],
+        use             = ['rant', 'GTEST4RANTTESTS', 'BOOST', 'GCOV', 'GMP'],
         install_path    = 'bin',
+        lib             = 'pthread',
         cxxflags        = cxxflags)
