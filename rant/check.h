@@ -68,7 +68,11 @@ struct throw_on_error :
 	public SanitizerHelper<T, Max, Min, throw_on_error<T, Max, Min>>
 {
 	template<typename U>
+#if __cplusplus < 201703L
 	inline static T overflow(U const val) throw(std::overflow_error)
+#else
+	inline static T overflow(U const val) noexcept(false)
+#endif
 	{
 #ifdef RANT_LIGHTWEIGHT_EXCEPTIONS
 		throw std::overflow_error("range overflow");
@@ -82,7 +86,11 @@ struct throw_on_error :
 	}
 
 	template<typename U>
+#if __cplusplus < 201703L
 	inline static T underflow(U const val) throw(std::underflow_error)
+#else
+	inline static T underflow(U const val) noexcept(false)
+#endif
 	{
 #ifdef RANT_LIGHTWEIGHT_EXCEPTIONS
 		throw std::underflow_error("range underflow");
