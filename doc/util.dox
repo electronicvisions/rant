@@ -10,9 +10,6 @@
 @def RANT_VALUE_NAME
 @brief name of member internally holding the ranged value
 
-@def RANT_EXPLICIT
-@brief Switch to turn on/off implicit down casting to base type
-
 @def RANT_VALUE
 @brief get value of boundary @a VAL
 
