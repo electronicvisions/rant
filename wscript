@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import sys, os
 from waflib.extras.test_base import summary
+from waflib.extras.symwaf2ic import get_toplevel_path
+
+def depends(dep):
+    dep('code-format')
 
 def options(opt):
     opt.load('doxygen')
@@ -23,9 +27,13 @@ def build(bld):
 
     # build documentation
     bld(features='doxygen',
-        doxyfile='doc/doxyfile',
-        install_path='doc/rant'
-    )
+        doxyfile=bld.root.make_node(os.path.join(get_toplevel_path(), "code-format/doxyfile")),
+        install_path='doc/rant',
+        pars={
+            "PROJECT_NAME": "\"Ranged Number Types\"",
+            "INPUT": os.path.join(get_toplevel_path(), "rant/rant")
+                     + " " + os.path.join(get_toplevel_path(), "rant/doc")
+        })
 
     bld.recurse('test')
 
