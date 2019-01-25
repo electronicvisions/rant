@@ -19,7 +19,7 @@ template<typename T, typename Max, typename Min,
 struct SanitizerHelper
 {
 	template<typename U>
-	inline T operator() (U const val) const RANT_NOEXCEPT_COND(
+	RANT_CONSTEXPR inline T operator() (U const val) const RANT_NOEXCEPT_COND(
 			RANT_NOEXCEPT(Sanitizer::overflow(val)) &&
 			RANT_NOEXCEPT(Sanitizer::underflow(val)))
 	{
@@ -39,7 +39,7 @@ struct SanitizerHelper<T, Max, Min, Sanitizer,
 		value_helper<T, Min>::value == 0, void>::type>
 {
 	template<typename U>
-	inline T operator() (U const val) const RANT_NOEXCEPT_COND(
+	RANT_CONSTEXPR inline T operator() (U const val) const RANT_NOEXCEPT_COND(
 			RANT_NOEXCEPT(Sanitizer::overflow(val)) &&
 			RANT_NOEXCEPT(Sanitizer::underflow(val)))
 	{
@@ -52,7 +52,7 @@ struct SanitizerHelper<T, Max, Min, Sanitizer,
 	}
 
 	// optimized specialization
-	inline T operator() (T const val) const RANT_NOEXCEPT_COND(
+	RANT_CONSTEXPR inline T operator() (T const val) const RANT_NOEXCEPT_COND(
 			RANT_NOEXCEPT(Sanitizer::overflow(val)))
 	{
 		if RANT_UNLIKELY(RANT_LESS(T, T, RANT_VALUE(Max), val)) {
@@ -110,13 +110,13 @@ struct clip_on_error :
 	public SanitizerHelper<T, Max, Min, clip_on_error<T, Max, Min>>
 {
 	template<typename U>
-	inline static T overflow(U const) RANT_NOEXCEPT
+	RANT_CONSTEXPR inline static T overflow(U const) RANT_NOEXCEPT
 	{
 		return RANT_VALUE(Max);
 	}
 
 	template<typename U>
-	inline static T underflow(U const) RANT_NOEXCEPT
+	RANT_CONSTEXPR inline static T underflow(U const) RANT_NOEXCEPT
 	{
 		return RANT_VALUE(Min);
 	}

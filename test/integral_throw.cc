@@ -197,3 +197,11 @@ TEST(ThrowRandom, intmax)
 {
 	random_test< rant::integral_range<intmax_t, 612432444444, -231320945> >::run();
 }
+
+TEST(Whatever, use_constexpr)
+{
+	constexpr rant::integral_range<char, 12, -55> a;
+	constexpr static rant::integral_range<intmax_t, 612432444444, -231320945> b;
+	// does not compile
+	// constexpr rant::integral_range<char, 12, -55> c(13);
+}

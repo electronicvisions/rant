@@ -148,7 +148,7 @@ template<typename RantT, typename ArgT>
 struct less
 {
 	template<typename T, typename U>
-	inline static bool compare(T const t, U const u)
+	RANT_CONSTEXPR inline static bool compare(T const t, U const u)
 	{
 		typedef typename promote<RantT, ArgT>::type type;
 		return type(t)<type(u);
@@ -157,7 +157,7 @@ struct less
 	// trap problematic combinations here
 
 	template<typename U>
-	inline static
+	RANT_CONSTEXPR inline static
 	typename std::enable_if<is_signed_integral<U>::value, bool>::type
 	compare(uintmax_t const t, U const u)
 	{
@@ -165,7 +165,7 @@ struct less
 	}
 
 	template<typename T>
-	inline static
+	RANT_CONSTEXPR inline static
 	typename std::enable_if<is_signed_integral<T>::value, bool>::type
 	compare(T const t, uintmax_t const u)
 	{
