@@ -22,10 +22,11 @@ template<typename NoOpt, typename Opt>
 void test_disable()
 {
 	ASSERT_FALSE((std::is_arithmetic<NoOpt>::value));
-	if (rant_disable)
+	if (rant_disable) {
 		ASSERT_TRUE((std::is_arithmetic<Opt>::value));
-	else
+	} else {
 		ASSERT_FALSE((std::is_arithmetic<Opt>::value));
+	}
 }
 
 template<typename T>
@@ -51,9 +52,10 @@ void test_explicit_cast()
 template<typename T>
 void test_minmax(int max, int min)
 {
-	if (rant_disable)
+	if (rant_disable) {
 		ASSERT_EQ(max, (std::numeric_limits<T>::max()));
 		ASSERT_EQ(min, (std::numeric_limits<T>::lowest()));
+	}
 }
 
 

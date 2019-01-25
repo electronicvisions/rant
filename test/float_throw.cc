@@ -80,8 +80,6 @@ TYPED_TEST(ThrowFloatBuiltin, InRangeInitialization)
 
 TYPED_TEST(ThrowFloatBuiltin, OverflowInitialization)
 {
-	typedef typename TestFixture::traits traits;
-
 	auto const max = std::numeric_limits<intmax_t>::max();
 	if (TestFixture::max < max) {
 		// NOTE: the parantheses around TypeParam(val) are necessary
@@ -91,8 +89,6 @@ TYPED_TEST(ThrowFloatBuiltin, OverflowInitialization)
 
 TYPED_TEST(ThrowFloatBuiltin, UnderflowInitialization)
 {
-	typedef typename TestFixture::traits traits;
-
 	auto const min = std::numeric_limits<intmax_t>::min();
 	// this if clause is actually, always true, because the minimal lower
 	// bound which can be assigned to floating_point_ranges is

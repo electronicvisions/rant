@@ -102,13 +102,15 @@ TYPED_TEST(ClipIntBuiltin, OverflowInitialization)
 
 	{
 		auto const max = std::numeric_limits<typename traits::type>::max();
-		if (traits::max::value < max)
+		if (traits::max::value < max) {
 			ASSERT_EQ(traits::max::value, TypeParam(max));
+		}
 	}
 	{
 		auto const max = std::numeric_limits<intmax_t>::max();
-		if (uintmax_t(traits::max::value) < uintmax_t(max))
+		if (uintmax_t(traits::max::value) < uintmax_t(max)) {
 			ASSERT_EQ(traits::max::value, (TypeParam(max)));
+		}
 	}
 }
 
@@ -118,14 +120,16 @@ TYPED_TEST(ClipIntBuiltin, UnderflowInitialization)
 
 	{
 		auto const min = std::numeric_limits<typename traits::type>::min();
-		if (traits::min::value > min)
+		if (traits::min::value > min) {
 			ASSERT_EQ(traits::min::value, TypeParam(min));
+		}
 	}
 
 	{
 		auto const min = std::numeric_limits<short>::min();
-		if (intmax_t(traits::min::value) > min)
+		if (intmax_t(traits::min::value) > min) {
 			ASSERT_EQ(traits::min::value, (TypeParam(min)));
+		}
 	}
 }
 

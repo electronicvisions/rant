@@ -18,7 +18,11 @@ struct PseudoArchive :
 	public detail::interface_oarchive<PseudoArchive>
 {
 	template<typename T>
+#if BOOST_VERSION >= 105900
+	void save_override(T const&) {}
+#else
 	void save_override(T const&, unsigned const) {}
+#endif
 };
 
 } // archive

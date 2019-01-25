@@ -24,16 +24,17 @@ template<typename OArchive, typename IArchive, typename T>
 void test_serialization(T const& t)
 {
 	std::stringstream ss;
-	OArchive oar(ss);
-
-	oar << boost::serialization::make_nvp("t", t);
-
+	{
+		OArchive oar(ss);
+		oar << boost::serialization::make_nvp("t", t);
+	}
 	ss.flush();
 
 	T tmp;
-	IArchive iar(ss);
-	iar >> boost::serialization::make_nvp("t", tmp);
-
+	{
+		IArchive iar(ss);
+		iar >> boost::serialization::make_nvp("t", tmp);
+	}
 	ASSERT_EQ(t, tmp);
 }
 

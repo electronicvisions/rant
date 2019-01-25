@@ -109,8 +109,9 @@ TYPED_TEST(ThrowIntBuiltin, OverflowInitialization)
 	}
 	{
 		auto const max = std::numeric_limits<intmax_t>::max();
-		if (uintmax_t(traits::max::value) < uintmax_t(max))
+		if (uintmax_t(traits::max::value) < uintmax_t(max)) {
 			ASSERT_THROW((TypeParam(max)), std::overflow_error) << max;
+		}
 	}
 }
 
@@ -128,8 +129,9 @@ TYPED_TEST(ThrowIntBuiltin, UnderflowInitialization)
 
 	{
 		auto const min = std::numeric_limits<short>::min();
-		if (intmax_t(traits::min::value) > min)
+		if (intmax_t(traits::min::value) > min) {
 			ASSERT_THROW((TypeParam(min)), std::underflow_error) << min;
+		}
 	}
 }
 
@@ -163,8 +165,6 @@ private:
 public:
 	static void run()
 	{
-		typedef typename traits::type base;
-
 		// call random test for signed ctor arguments
 		for_all_types<signed_type<64>, Functor> () ();
 

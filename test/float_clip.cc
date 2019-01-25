@@ -80,24 +80,21 @@ TYPED_TEST(ClipFloatBuiltin, InRangeInitialization)
 
 TYPED_TEST(ClipFloatBuiltin, OverflowInitialization)
 {
-	typedef typename TestFixture::traits traits;
-	typedef TypeParam type;
-
 	auto const max = std::numeric_limits<intmax_t>::max();
-	if (TestFixture::max < max)
+	if (TestFixture::max < max) {
 		ASSERT_EQ(TestFixture::max, TypeParam(max));
+	}
 }
 
 TYPED_TEST(ClipFloatBuiltin, UnderflowInitialization)
 {
-	typedef typename TestFixture::traits traits;
-
 	auto const min = std::numeric_limits<intmax_t>::min();
 	// this if clause is actually, always true, because the minimal lower
 	// bound which can be assigned to floating_point_ranges is
 	// `-numeric_limits<intmax_t>::max()` (=numeric_limits<intmax_t>::min()+1).
-	if (TestFixture::min > min)
+	if (TestFixture::min > min) {
 		ASSERT_EQ(TestFixture::min, TypeParam(min));
+	}
 }
 
 

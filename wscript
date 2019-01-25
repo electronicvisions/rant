@@ -4,9 +4,11 @@ from waflib.extras.test_base import summary
 
 def options(opt):
     opt.load('test_base')
+    opt.recurse('test')
 
 def configure(cfg):
     cfg.load('test_base')
+    cfg.recurse('test')
 
 def build(bld):
     # only export include path, header only lib.
@@ -16,5 +18,7 @@ def build(bld):
     # install headers
     for header in bld.path.ant_glob('rant/**/*.(h)'):
         bld.install_as('${PREFIX}/include/%s' % header.path_from(bld.path), header)
+
+    bld.recurse('test')
 
     bld.add_post_fun(summary)
