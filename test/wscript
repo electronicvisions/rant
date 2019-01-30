@@ -18,7 +18,7 @@ def configure(cfg):
 
     cfg.check_boost(
             lib='serialization system thread',
-            uselib_store='BOOST')
+            uselib_store='BOOST4RANTTEST')
 
     # boost::multiprecision has been introduced in 1.53
     if cfg.env.BOOST_VERSION < '1_53':
@@ -57,7 +57,7 @@ def build(bld):
     bld(target          = 'rant-tests',
         features        = 'cxx cxxprogram gtest',
         source          = sources,
-        use             = ['rant', 'BOOST', 'GCOV', 'GMP'],
+        use             = ['rant', 'BOOST4RANTTEST', 'GCOV', 'GMP'],
         install_path    = 'bin',
         lib             = 'pthread',
         cxxflags        = cxxflags)
