@@ -62,7 +62,7 @@ template<typename T>
 typename ClipFloatBuiltin<T>::base const ClipFloatBuiltin<T>::max
 	= rant::value_helper<base, typename traits::max>::get();
 
-TYPED_TEST_CASE(ClipFloatBuiltin, float_types);
+TYPED_TEST_SUITE(ClipFloatBuiltin, float_types);
 
 TYPED_TEST(ClipFloatBuiltin, NoExcept)
 {

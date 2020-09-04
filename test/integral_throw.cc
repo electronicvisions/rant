@@ -74,7 +74,7 @@ struct ThrowIntBuiltin :
 	typedef rant::traits<T> traits;
 };
 
-TYPED_TEST_CASE(ThrowIntBuiltin, int_types);
+TYPED_TEST_SUITE(ThrowIntBuiltin, int_types);
 
 TYPED_TEST(ThrowIntBuiltin, NoExcept)
 {

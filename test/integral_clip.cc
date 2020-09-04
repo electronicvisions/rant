@@ -74,7 +74,7 @@ struct ClipIntBuiltin :
 	typedef rant::traits<T> traits;
 };
 
-TYPED_TEST_CASE(ClipIntBuiltin, int_types);
+TYPED_TEST_SUITE(ClipIntBuiltin, int_types);
 
 TYPED_TEST(ClipIntBuiltin, NoExcept)
 {

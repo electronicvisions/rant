@@ -130,7 +130,7 @@ struct AllIntegers:
 	typedef T type;
 };
 
-TYPED_TEST_CASE(AllIntegers, integer_types);
+TYPED_TEST_SUITE(AllIntegers, integer_types);
 
 TYPED_TEST(AllIntegers, Native)
 {
@@ -172,7 +172,7 @@ struct AllFloats:
 	typedef T type;
 };
 
-TYPED_TEST_CASE(AllFloats, floating_point_types);
+TYPED_TEST_SUITE(AllFloats, floating_point_types);
 
 TYPED_TEST(AllFloats, Native)
 {

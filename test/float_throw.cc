@@ -62,7 +62,7 @@ template<typename T>
 typename ThrowFloatBuiltin<T>::base const ThrowFloatBuiltin<T>::max
 	= rant::value_helper<base, typename traits::max>::get();
 
-TYPED_TEST_CASE(ThrowFloatBuiltin, float_types);
+TYPED_TEST_SUITE(ThrowFloatBuiltin, float_types);
 
 TYPED_TEST(ThrowFloatBuiltin, NoExcept)
 {
