@@ -5,7 +5,6 @@
 
 #include <stdexcept>
 #include <string>
-#include <cmath>
 
 #include "rant/util.h"
 
