@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <limits>
+
 #include "rant/util.h"
 #include "rant/check.h"
 #include "rant/op.h"
