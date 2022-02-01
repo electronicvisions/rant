@@ -73,6 +73,7 @@ struct throw_on_error :
 	inline static T overflow(U const val) noexcept(false)
 #endif
 	{
+#ifndef __ppu__
 #ifdef RANT_LIGHTWEIGHT_EXCEPTIONS
 		throw std::overflow_error("range overflow");
 #else
@@ -80,6 +81,9 @@ struct throw_on_error :
 		s += std::to_string(val) + " > max(";
 		s += std::to_string(RANT_VALUE(Max)) + ")";
 		throw std::overflow_error(s);
+#endif
+#else
+		exit(1);
 #endif
 		return T(val);
 	}
@@ -91,6 +95,7 @@ struct throw_on_error :
 	inline static T underflow(U const val) noexcept(false)
 #endif
 	{
+#ifndef __ppu__
 #ifdef RANT_LIGHTWEIGHT_EXCEPTIONS
 		throw std::underflow_error("range underflow");
 #else
@@ -98,6 +103,9 @@ struct throw_on_error :
 		s += std::to_string(val) + " < min(";
 		s += std::to_string(RANT_VALUE(Min)) + ")";
 		throw std::underflow_error(s);
+#endif
+#else
+		exit(1);
 #endif
 		return T(val);
 	}
