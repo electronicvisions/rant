@@ -4,6 +4,7 @@
 #pragma once
 
 #include <limits>
+#include <ratio>
 
 #include "rant/util.h"
 #include "rant/check.h"
