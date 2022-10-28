@@ -17,13 +17,19 @@ def configure(cfg):
     cfg.recurse('test')
 
 def build(bld):
+    # install headers
+    bld.install_files(
+        dest = '${PREFIX}/include',
+        files = bld.path.ant_glob('**/*.(h|hpp)', excl='test'),
+        name = 'rant_header',
+        relative_trick = True
+    )
+
     # only export include path, header only lib.
     bld(target          = 'rant',
-        export_includes = '.')
-
-    # install headers
-    for header in bld.path.ant_glob('rant/**/*.(h)'):
-        bld.install_as('${PREFIX}/include/%s' % header.path_from(bld.path), header)
+        export_includes = '.',
+        depends_on = 'rant_header',
+    )
 
     # build documentation
     bld(features='doxygen',
