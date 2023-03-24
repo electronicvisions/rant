@@ -1,7 +1,8 @@
-@Library("jenlib") _
+@Library("jenlib@ebrains-4.0") _
 
 withCcache() {
 	wafDefaultPipeline(projects: ["rant"],
+	                   setupOptions: "--release-branch=ebrains-4.0",
 	                   container: [app: "dls-core"],
 	                   configureInstallOptions: "--build-profile=ci",
 	                   notificationChannel: "#dls-software")
