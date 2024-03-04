@@ -28,7 +28,7 @@ def build(bld):
     # only export include path, header only lib.
     bld(target          = 'rant',
         export_includes = '.',
-        depends_on = 'rant_header',
+        use             = 'rant_header',
     )
 
     # build documentation
